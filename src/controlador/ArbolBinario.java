@@ -3,7 +3,6 @@ package controlador;
 /**
  * Clase ArbolBinario, contiene toda la estructura para actuar sobre el arbol;
  * <ul>
- *      <li> Agregar nodos </li>
  *      <li> Recorrer los arboles </li>
  *      <li> Conocer su peso </li>
  * </ul>
@@ -60,59 +59,6 @@ public class ArbolBinario {
      */
     public boolean esVacio(){
         return raiz == null;
-    }
-    
-    /**
-     * Agrega un nodo al arbol binario de busqueda
-     * @param nodo Nodo a agregar al arbol
-     * @param raiz Raiz del arbol para iniciar busqueda de espacio
-     */
-    private void agregarNodo(Nodo nodo, Nodo raiz){
-        //Partiendo de una raiz se comprueba si esta es diferente de null
-        
-        if(raiz == null)
-            /*
-            En caso de ser null se pasa a ingresar la raiz del arbol
-            */
-            this.ingresarRaiz(nodo);
-        else
-            if(nodo.valorNodo() <= raiz.valorNodo())
-                /*
-                Si el valor del nodo es menor al valor del nodo raiz, 
-                mira si el siquiente nodo es nulo a la izquierda
-                */
-                if(raiz.subArbolIzq() == null)
-                    /*
-                    En caso de ser nulo, agrega el nodo como hijo a la izquierda
-                    */
-                    raiz.ramaIzq(nodo);
-                else
-                    /*
-                    Si no es nulo, intentará buscando mas profundamente un espacio a la izquierda
-                    */
-                    agregarNodo(nodo, raiz.subArbolIzq());
-            else
-                /*
-                En caso de ser mayor el nodo pasa a la derecha
-                */
-                if(raiz.subArbolDer() == null)
-                    /*
-                    En caso de ser nulo, agrega el nodo hijo a la derecha
-                    */
-                    raiz.ramaDer(nodo);
-                else
-                    /*
-                    Si no es nulo, intentará buscando mas profundamente un espacio a la derecha
-                    */
-                    agregarNodo(nodo, raiz.subArbolDer());
-    }
-    
-    /**
-     * Agrega un nodo al arbol binario
-     * @param nodo Nodo a agregar al arbol
-     */
-    public void agregarNodo(Nodo nodo){
-        this.agregarNodo(nodo, this.raiz);
     }
     
     /**

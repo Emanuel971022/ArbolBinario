@@ -3,8 +3,12 @@ package controlador;
 /**
  * Se considera una extensión de un arbol binario, con operaciones adicionales
  * como el borrado y busqueda de un nodo al arbol binario
+ * <ul>
+ *      <li> Buscar nodos </li>
+ *      <li> Agregar nodos </li>
+ * </ul>
  * @author Emanuel Martínez Pinzón
- * @version 1.0
+ * @version 1.1
  * @since 2016
  */
 public class ArbolBinarioBusqueda extends ArbolBinario{
@@ -67,6 +71,41 @@ public class ArbolBinarioBusqueda extends ArbolBinario{
                 raizSub = raizSub.subArbolIzq();
             else 
                 raizSub = raizSub.subArbolDer();
+        
+        return raizSub;
+    }
+    
+    /**
+     * Agrega un nodo al arbol binario de busqueda
+     * @param valor Valor del Nodo
+     * @throws Exception Nodo duplicado
+     */
+    public void insertar(Object valor) throws Exception {
+        Comparador dato;
+        dato = (Comparador) valor;
+        raiz = insertar(raiz, dato);
+    }
+    
+    /**
+     * Metodo descrito para insertar Nodos a un ABB
+     * @param raizSub Raiz sub arbol
+     * @param dato Dato a agregar
+     * @return Retorna el nodo que agrega
+     * @throws Exception Nodo duplicado
+     */
+    protected Nodo insertar(Nodo raizSub, Comparador dato) throws Exception {
+        if(raizSub == null)
+            raizSub = new Nodo(dato);
+        else if(dato.menorQue(raizSub.valorNodo())){
+            Nodo iz;
+            iz = insertar(raizSub.subArbolIzq(), dato);
+            raizSub.ramaIzq(iz);
+        }else if(dato.mayorQue(raizSub.valorNodo())){
+            Nodo dr;
+            dr = insertar(raizSub.subArbolDer(), dato);
+            raizSub.ramaDer(dr);
+        }else
+            throw new Exception("Nodo duplicado");
         
         return raizSub;
     }

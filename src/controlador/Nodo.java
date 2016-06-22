@@ -5,11 +5,11 @@ package controlador;
  * <br>
  * Contiene la información del Nodo así como la referencia a sus hijos.
  * @author Emanuel Martínez Pinzón
- * @version 1.1
+ * @version 1.2
  * @since 2016
  */
 public class Nodo {
-    private int dato;
+    private Object dato;
     private Nodo izq;
     private Nodo der;
 
@@ -17,7 +17,7 @@ public class Nodo {
      * Constructor del Nodo Hoja
      * @param dato Dato para construir un Nodo de tipo Hoja
      */
-    public Nodo(int dato) {
+    public Nodo(Object dato) {
         this.dato = dato;
         izq = der = null;
     }
@@ -41,7 +41,7 @@ public class Nodo {
      * @return Retorna el dato del Nodo
      */
     public int valorNodo(){
-        return dato;
+        return (Integer) dato;
     }
     
     /**
@@ -70,7 +70,7 @@ public class Nodo {
      * Actua como un setDato
      * @param dato Dato a guardar
      */
-    public void nuevoValor(int dato){
+    public void nuevoValor(Object dato){
         this.dato = dato;
     }
     
