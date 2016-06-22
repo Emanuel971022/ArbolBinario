@@ -6,9 +6,10 @@ package controlador;
  * <ul>
  *      <li> Buscar nodos </li>
  *      <li> Agregar nodos </li>
+ *      <li> Eliminar nodos </li>
  * </ul>
  * @author Emanuel Martínez Pinzón
- * @version 1.1
+ * @version 1.2
  * @since 2016
  */
 public class ArbolBinarioBusqueda extends ArbolBinario{
@@ -108,5 +109,78 @@ public class ArbolBinarioBusqueda extends ArbolBinario{
             throw new Exception("Nodo duplicado");
         
         return raizSub;
+    }
+    
+    /**
+     * Elimina un valor de un arbol binario de busqueda
+     * @param valor Valor a buscar y eliminar en el arbol
+     * @throws Exception "No encontrado el nodo con la clave"
+     */
+    public void eliminar(Object valor) throws Exception {
+        Comparador dato;
+        dato = (Comparador) valor;
+        raiz = eliminar(raiz, dato);
+    }
+    
+    /**
+     * Recorre el arbol binario de busqueda para encontrar el elemento deseado
+     * y eliminarlo
+     * @param raizSub Raiz sub arbol del arbol
+     * @param dato Dato a eliminar
+     * @return Retorna el nodo a eliminar
+     * @throws Exception "No encontrado el nodo con la clave"
+     */
+    protected Nodo eliminar(Nodo raizSub, Comparador dato) throws Exception {
+        if(raizSub == null)
+            throw new Exception("No encontrado el nodo con la clave");
+        else if(dato.menorQue(raizSub.valorNodo())){
+            Nodo iz;
+            iz = eliminar(raizSub.subArbolIzq(), dato);
+            raizSub.ramaIzq(iz);
+        }else if(dato.mayorQue(raizSub.valorNodo())){
+            Nodo dr;
+            dr = eliminar(raizSub.subArbolDer(), dato);
+            raizSub.ramaDer(dr);
+        }else{
+            Nodo q;
+            q = raizSub;
+            if(q.subArbolIzq() == null)
+                raizSub = q.subArbolDer();
+            else if(q.subArbolDer() == null)
+                raizSub = q.subArbolIzq();
+            else
+                q = reemplazar(q);
+            
+            q = null;
+        }
+        
+        return raizSub;
+    }
+    
+    /**
+     * Reemplaza el nodo actual con un nodo del arbol binario de busqueda que cumpla
+     * con ser raiz digna; mayor que el subarbol izquierdo y menor que el subarbol derecho
+     * @param act Elemento actual
+     * @return Retorna un nodo
+     */
+    private Nodo reemplazar(Nodo act){
+        Nodo a, p;
+        
+        p = act;
+        a = act.subArbolIzq();
+        
+        while(a.subArbolDer() != null){
+            p = a;
+            a = a.subArbolDer();
+        }
+        
+        act.nuevoValor(a.valorNodo());
+        
+        if(p == act)
+            p.ramaIzq(a.subArbolIzq());
+        else
+            p.ramaDer(a.subArbolIzq());
+        
+        return a;
     }
 }
