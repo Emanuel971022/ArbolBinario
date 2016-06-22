@@ -5,11 +5,11 @@ package controlador;
  * <br>
  * Contiene la información del Nodo así como la referencia a sus hijos.
  * @author Emanuel Martínez Pinzón
- * @version 1.0
+ * @version 1.1
  * @since 2016
  */
 public class Nodo {
-    private Object dato;
+    private int dato;
     private Nodo izq;
     private Nodo der;
 
@@ -17,7 +17,7 @@ public class Nodo {
      * Constructor del Nodo Hoja
      * @param dato Dato para construir un Nodo de tipo Hoja
      */
-    public Nodo(Object dato) {
+    public Nodo(int dato) {
         this.dato = dato;
         izq = der = null;
     }
@@ -28,7 +28,7 @@ public class Nodo {
      * @param izq Referencia al hijo a la izquierda
      * @param der Referencia al hijo a la derecha
      */
-    public Nodo(Object dato, Nodo izq, Nodo der){
+    public Nodo(int dato, Nodo izq, Nodo der){
         this(dato);
         this.izq = izq;
         this.der = der;
@@ -40,7 +40,7 @@ public class Nodo {
      * Actua como un getDato
      * @return Retorna el dato del Nodo
      */
-    public Object valorNodo(){
+    public int valorNodo(){
         return dato;
     }
     
@@ -70,7 +70,7 @@ public class Nodo {
      * Actua como un setDato
      * @param dato Dato a guardar
      */
-    public void nuevoValor(Object dato){
+    public void nuevoValor(int dato){
         this.dato = dato;
     }
     
@@ -92,5 +92,12 @@ public class Nodo {
      */
     public void ramaDer(Nodo der){
         this.der = der;
+    }
+    
+    /**
+     * Se imprime el dato del nodo
+     */
+    public void visistar(){
+        System.out.print(dato+" ");
     }
 }
