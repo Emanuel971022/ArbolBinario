@@ -5,6 +5,7 @@ package controlador;
  * <ul>
  *      <li> Agregar nodos </li>
  *      <li> Recorrer los arboles </li>
+ *      <li> Conocer su peso </li>
  * </ul>
  * 
  * @author Emanuel Martínez Pinzón
@@ -12,7 +13,7 @@ package controlador;
  * @since 2016
  */
 public class ArbolBinario {
-    private Nodo raiz;
+    protected Nodo raiz;
     
     /**
      * Contructor de un arbol binario vacio.
@@ -164,5 +165,17 @@ public class ArbolBinario {
             postorden(nodo.subArbolDer());
             nodo.visistar();
         }
+    }
+    
+    /**
+     * Recorre el arbol contando la cantidad de nodos que tiene el arbol
+     * @param raiz Nodo raiz del arbol en donde inicia el conteo
+     * @return Retorna un entero con la cantidad de nodos del arbol o su peso
+     */
+    public static int numNodos(Nodo raiz){
+        if(raiz == null)
+            return 0;
+        else
+            return 1 + numNodos(raiz.subArbolDer())+ numNodos(raiz.subArbolIzq());
     }
 }
